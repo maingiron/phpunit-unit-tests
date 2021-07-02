@@ -22,7 +22,7 @@ final class NotEmptyValidatorTest extends TestCase
         $this->assertEquals($expectedResult, $returned);
     }
 
-    public function valueProvider()
+    public function valueProvider(): array
     {
         return [
             'shouldBeValidWhenValueIsNotEmpty' => ['value' => 'xpto', 'expectedResult' => true],
