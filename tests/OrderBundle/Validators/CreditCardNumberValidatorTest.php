@@ -19,7 +19,7 @@ final class CreditCardNumberValidatorTest extends TestCase
 
         $returned = $validator->isValid();
 
-        $this->assertEquals($expectedResult, $returned);
+        self::assertEquals($expectedResult, $returned);
     }
 
     public function valueProvider(): array
