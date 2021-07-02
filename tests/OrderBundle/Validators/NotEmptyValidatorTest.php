@@ -30,4 +30,3 @@ final class NotEmptyValidatorTest extends TestCase
         ];
     }
 }
-
