@@ -28,27 +28,27 @@ final class BadWordsValidatorTest extends TestCase
 
     public function badWordsProvider()
     {
-        $badWordsList = ['bobo', 'chule', 'besta'];
+        $badWordsListByTigre = ['jujuba de anis', 'vai comer beijinho antes da janta', 'cajuzinho diet'];
 
         return [
             'shouldFindWhenHasBadWords' => [
-                'badWordsList' => $badWordsList,
-                'text' => 'Restaurante de gente besta',
+                'badWordsList' => $badWordsListByTigre,
+                'text' => 'Pô Hamilton, seu jujuba de anis...',
                 'expected' => true
             ],
             'shouldNotFindWhenHasNotBadWords' => [
-                'badWordsList' => $badWordsList,
-                'text' => 'Trocar batata por salada',
+                'badWordsList' => $badWordsListByTigre,
+                'text' => 'Agora o chefe vai ficar uma pelúcia com a gente',
                 'expected' => false
             ],
             'shouldNotFindWhenTextIsEmpty' => [
-                'badWordsList' => $badWordsList,
+                'badWordsList' => $badWordsListByTigre,
                 'text' => '',
                 'expected' => false
             ],
             'shouldNotFindWhenBadWordsListIsEmpty' => [
                 'badWordsList' => [],
-                'text' => 'Restaurante de gente besta',
+                'text' => 'Seu cajuzinho diet',
                 'expected' => false
             ]
         ];
