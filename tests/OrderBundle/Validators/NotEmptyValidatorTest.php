@@ -13,20 +13,20 @@ final class NotEmptyValidatorTest extends TestCase
      * @test 
      * @dataProvider valueProvider
      */
-    public function isValid($value, $expectedResult): void
+    public function isValid($value, $expected): void
     {
         $validator = new NotEmptyValidator($value);
 
         $returned = $validator->isValid();
 
-        self::assertEquals($expectedResult, $returned);
+        self::assertEquals($expected, $returned);
     }
 
     public function valueProvider(): array
     {
         return [
-            'shouldBeValidWhenValueIsNotEmpty' => ['value' => 'xpto', 'expectedResult' => true],
-            'shouldNotBeValidWhenValueIsEmpty' => ['value' => '', 'expectedResult' => false]
+            'shouldBeValidWhenValueIsNotEmpty' => ['value' => 'xpto', 'expected' => true],
+            'shouldNotBeValidWhenValueIsEmpty' => ['value' => '', 'expected' => false]
         ];
     }
 }

@@ -13,22 +13,22 @@ final class NumericValidatorTest extends TestCase
      * @test 
      * @dataProvider valueProvider
      */
-    public function isValid($value, $expectedResult): void
+    public function isValid($value, $expected): void
     {
         $validator = new NumericValidator($value);
 
         $returned = $validator->isValid();
 
-        self::assertEquals($expectedResult, $returned);
+        self::assertEquals($expected, $returned);
     }
 
     public function valueProvider(): array
     {
         return [
-            'shouldBeValidWhenValueIsANumber' => ['value' => 10, 'expectedResult' => true],
-            'shouldBeValidWhenValueIsANumberAsString' => ['value' => '20', 'expectedResult' => true],
-            'shouldNotBeValidWhenValueIsNotANumber' => ['value' => 'xpto', 'expectedResult' => false],
-            'shouldNotBeValidWhenValueIsEmpty' => ['value' => '', 'expectedResult' => false],
+            'shouldBeValidWhenValueIsANumber' => ['value' => 10, 'expected' => true],
+            'shouldBeValidWhenValueIsANumberAsString' => ['value' => '20', 'expected' => true],
+            'shouldNotBeValidWhenValueIsNotANumber' => ['value' => 'xpto', 'expected' => false],
+            'shouldNotBeValidWhenValueIsEmpty' => ['value' => '', 'expected' => false],
         ];
     }
 }

@@ -14,13 +14,13 @@ final class CreditCardExpirationValidatorTest extends TestCase
      * @test 
      * @dataProvider valueProvider
      */
-    public function isValid($value, $expectedResult): void
+    public function isValid($value, $expected): void
     {
         $validator = new CreditCardExpirationValidator($value);
 
         $returned = $validator->isValid();
 
-        self::assertEquals($expectedResult, $returned);
+        self::assertEquals($expected, $returned);
     }
 
     public function valueProvider(): array
@@ -29,8 +29,8 @@ final class CreditCardExpirationValidatorTest extends TestCase
         $yesterday = $this->createDateWithModify('-1 day');
 
         return [
-            'shouldBeValidWhenDateIsNotExpired' => ['value' => $tomorrow, 'expectedResult' => true],
-            'shouldNotBeValidWhenDateIsExpired' => ['value' => $yesterday, 'expectedResult' => false]
+            'shouldBeValidWhenDateIsNotExpired' => ['value' => $tomorrow, 'expected' => true],
+            'shouldNotBeValidWhenDateIsExpired' => ['value' => $yesterday, 'expected' => false]
         ];
     }
 
