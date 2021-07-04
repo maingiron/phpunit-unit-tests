@@ -28,9 +28,13 @@ final class FidelityProgramServiceTest extends TestCase
 
         $loggerMock = $this->createMock(LoggerInterface::class);
 
-        $service = new FidelityProgramService($repositoryMock, $calculatorMock, $loggerMock);
+        $service = new FidelityProgramService(
+            $repositoryMock, 
+            $calculatorMock, 
+            $loggerMock
+        );
 
-        $customerMock = $this->createMock(Customer::class);
+        $customerMock = $this->createMock(Customer::class); // dummy here
         $valueFake = 50;
 
         $service->addPoints($customerMock, $valueFake);
@@ -51,11 +55,54 @@ final class FidelityProgramServiceTest extends TestCase
 
         $loggerMock = $this->createMock(LoggerInterface::class);
 
-        $service = new FidelityProgramService($repositoryMock, $calculatorMock, $loggerMock);
+        $service = new FidelityProgramService(
+            $repositoryMock, 
+            $calculatorMock, 
+            $loggerMock
+        );
 
         $customerMock = $this->createMock(Customer::class);
         $valueFake = 20;
 
         $service->addPoints($customerMock, $valueFake);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnLogMessagesWhenSavePoints()
+    {
+        $repositoryMock = $this->createMock(PointsRepository::class);
+
+        $calculatorMock = $this->createMock(PointsCalculator::class);
+        $calculatorMock->method('calculatePointsToReceive')
+            ->willReturn(200);
+
+        $allMessages = [];
+        $loggerMock = $this->createMock(LoggerInterface::class);
+        $loggerMock->method('log')
+            ->will($this->returnCallback(
+                function ($message) use (&$allMessages) {
+                    $allMessages[] = $message;
+                }
+            )); // spy here
+
+        $service = new FidelityProgramService(
+            $repositoryMock, 
+            $calculatorMock, 
+            $loggerMock
+        );
+
+        $customerMock = $this->createMock(Customer::class);
+        $valueFake = 60;
+
+        $service->addPoints($customerMock, $valueFake);
+
+        $expectedMessages = [
+            'Checking points for customer',
+            'Customer received points'
+        ];
+
+        $this->assertEquals($expectedMessages, $allMessages);
     }
 }
