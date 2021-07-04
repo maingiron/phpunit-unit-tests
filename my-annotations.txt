@@ -1,4 +1,5 @@
-- Stub: Cria um objeto falso e digo o que será retornado nos métodos (ex: willReturn())
-- Mock: Tem a mesma característica do Stub além de poder fazer asserções dos métodos (ex: $this->once(), $this->never())
-- Dummy: Cria um objeto em falso, porém, não especifica nenhum retorno/asserção (ex: criado para satisfazer algum parâmetro de algum método) [dummies]
-- Spy: São parecido com os mocks, porém, as asserções são feitas pelo estado (propriedade) do objeto (ex: criar um método para obter a propriedade de um objeto e realizar a asserção)
+- Stubs: Objetos que fornecem respostas predefinidas para atingir cenários desejados. (ex: willReturn())
+- Mocks: Objetos que além de ser possível fornecer respostas predefinidas, podem também ter asserções através do seu comportamento. (ex: $this->once(), $this->never())
+- Dummies: Objetos que não possuem nenhuma funcionalidade, seu objetivo é somente satisfazer os parâmetros das classes e métodos para executar o teste.
+- Spies: Objetos que além de ser possível fornecer respostas predefinidas, podem também ter asserções através do seu estado com dados que são armazenados em suas chamadas. (ex: criar um método para obter a propriedade de um objeto e realizar a asserção)
+- Fakes: Objetos que possuem alguma funcionalidade limitada, porém são construídos somente para executar os testes, não sendo possível utilizar em produção. (ex: fake para client/database)
