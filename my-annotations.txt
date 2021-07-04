@@ -1,0 +1,2 @@
+Stub: Cria um objeto falso e digo o que será retornado nos métodos (ex: willReturn())
+Mock: Tem a mesma característica do Stub além de poder fazer asserções dos métodos (ex: $this->once(), $this->never())
