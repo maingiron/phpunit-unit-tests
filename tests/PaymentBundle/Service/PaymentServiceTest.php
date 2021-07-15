@@ -15,13 +15,14 @@ use PHPUnit\Framework\TestCase;
 
 final class PaymentServiceTest extends TestCase
 {
-    private $gatewayMock;
-    private $repositoryMock;
-    private $service;
-    private $customerMock;
-    private $itemMock;
-    private $creditCardMock;
+    private Gateway $gatewayMock;
+    private PaymentTransactionRepository $repositoryMock;
+    private Customer $customerMock;
+    private Item $itemMock;
+    private CreditCard $creditCardMock;
 
+    private $service;
+    
     public function setUp(): void
     {
         $this->gatewayMock = $this->createMock(Gateway::class);
