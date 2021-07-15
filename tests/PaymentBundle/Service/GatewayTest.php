@@ -29,6 +29,7 @@ final class GatewayTest extends TestCase
             )); // fake here
 
         $loggerMock = $this->createMock(LoggerInterface::class);
+
         $user = 'dominic.toretto';
         $password = '10secondcar';
 
@@ -61,6 +62,10 @@ final class GatewayTest extends TestCase
             ));
 
         $loggerMock = $this->createMock(LoggerInterface::class);
+        $loggerMock->expects($this->once())
+            ->method('log')
+            ->with('Payment failed');
+
         $user = 'brian.oconner';
         $password = self::VALID_PASSWORD_MAGIC;
 
@@ -93,6 +98,7 @@ final class GatewayTest extends TestCase
             ));
 
         $loggerMock = $this->createMock(LoggerInterface::class);
+        
         $user = 'roman.pearce';
         $password = self::VALID_PASSWORD_MAGIC;
 
