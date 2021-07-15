@@ -15,29 +15,41 @@ use PHPUnit\Framework\TestCase;
 
 final class PaymentServiceTest extends TestCase
 {
+    private $gatewayMock;
+    private $repositoryMock;
+    private $service;
+    private $customerMock;
+    private $itemMock;
+    private $creditCardMock;
+
+    public function setUp(): void
+    {
+        $this->gatewayMock = $this->createMock(Gateway::class);
+        $this->repositoryMock = $this->createMock(PaymentTransactionRepository::class);
+        $this->customerMock = $this->createMock(Customer::class);
+        $this->itemMock = $this->createMock(Item::class);
+        $this->creditCardMock = $this->createMock(CreditCard::class);
+
+        $this->service = new PaymentService($this->gatewayMock, $this->repositoryMock);
+    }
+
     /**
      * @test
      */
     public function shouldBeSaveWhenGatewayReturnedOkWithRetries()
     {
-        $gatewayMock = $this->createMock(Gateway::class);
-        $gatewayMock->expects($this->atLeast(3))
+        $this->gatewayMock->expects($this->atLeast(3))
             ->method('pay')
             ->will($this->onConsecutiveCalls(
                 false, false, true
             ));
 
-        $repositoryMock = $this->createMock(PaymentTransactionRepository::class);
-        $repositoryMock->expects($this->once())
+        $this->repositoryMock->expects($this->once())
             ->method('save');
 
-        $service = new PaymentService($gatewayMock, $repositoryMock);
+        $this->service = new PaymentService($this->gatewayMock, $this->repositoryMock);
 
-        $customerMock = $this->createMock(Customer::class);
-        $itemMock = $this->createMock(Item::class);
-        $creditCardMock = $this->createMock(CreditCard::class);
-
-        $service->pay($customerMock, $itemMock, $creditCardMock);
+        $this->service->pay($this->customerMock, $this->itemMock, $this->creditCardMock);
     }
 
     /**
@@ -45,25 +57,20 @@ final class PaymentServiceTest extends TestCase
      */
     public function shouldBeThrowExceptionWhenGatewayFailed()
     {
-        $gatewayMock = $this->createMock(Gateway::class);
-        $gatewayMock->expects($this->atLeast(3))
+        $this->gatewayMock->expects($this->atLeast(3))
             ->method('pay')
             ->will($this->onConsecutiveCalls(
                 false, false, false
             ));
 
-        $repositoryMock = $this->createMock(PaymentTransactionRepository::class);
-        $repositoryMock->expects($this->never())
+        $this->repositoryMock = $this->createMock(PaymentTransactionRepository::class);
+        $this->repositoryMock->expects($this->never())
             ->method('save');
 
         $this->expectException(PaymentErrorException::class);
 
-        $service = new PaymentService($gatewayMock, $repositoryMock);
+        $this->service = new PaymentService($this->gatewayMock, $this->repositoryMock);
 
-        $customerMock = $this->createMock(Customer::class);
-        $itemMock = $this->createMock(Item::class);
-        $creditCardMock = $this->createMock(CreditCard::class);
-
-        $service->pay($customerMock, $itemMock, $creditCardMock);
+        $this->service->pay($this->customerMock, $this->itemMock, $this->creditCardMock);
     }
 }
