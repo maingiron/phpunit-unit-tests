@@ -13,7 +13,7 @@ final class CustomerTest extends TestCase
      * @test
      * @dataProvider customerProvider
      */
-    public function isAllowedToOrder($isActive, $isBlocked, $name, $phone, $expected)
+    public function isAllowedToOrder($isActive, $isBlocked, $name, $phone, $expected): void
     {
         $customer = new Customer(
             $isActive, 
@@ -27,7 +27,7 @@ final class CustomerTest extends TestCase
         self::assertEquals($expected, $returned);
     }
 
-    public function customerProvider()
+    public function customerProvider(): array
     {
         return [
             'shouldBeAllowedWhenIsActiveAndNotBlocked' => [

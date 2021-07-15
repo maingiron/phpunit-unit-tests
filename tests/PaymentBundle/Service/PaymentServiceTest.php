@@ -36,7 +36,7 @@ final class PaymentServiceTest extends TestCase
     /**
      * @test
      */
-    public function shouldBeSaveWhenGatewayReturnedOkWithRetries()
+    public function shouldBeSaveWhenGatewayReturnedOkWithRetries(): void
     {
         $this->gatewayMock->expects($this->atLeast(3))
             ->method('pay')
@@ -55,7 +55,7 @@ final class PaymentServiceTest extends TestCase
     /**
      * @test
      */
-    public function shouldBeThrowExceptionWhenGatewayFailed()
+    public function shouldBeThrowExceptionWhenGatewayFailed(): void
     {
         $this->gatewayMock->expects($this->atLeast(3))
             ->method('pay')
@@ -67,7 +67,7 @@ final class PaymentServiceTest extends TestCase
         $this->repositoryMock->expects($this->never())
             ->method('save');
 
-        $this->expectException(PaymentErrorException::class);
+        self::expectException(PaymentErrorException::class);
 
         $this->service = new PaymentService($this->gatewayMock, $this->repositoryMock);
 

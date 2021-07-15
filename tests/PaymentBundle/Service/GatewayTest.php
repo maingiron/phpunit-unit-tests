@@ -18,7 +18,7 @@ final class GatewayTest extends TestCase
     /**
      * @test
      */
-    public function shouldNotPayWhenAuthenticationFail()
+    public function shouldNotPayWhenAuthenticationFail(): void
     {
         $clientMock = $this->createMock(HttpClientInterface::class);
         $clientMock->method('send')
@@ -44,13 +44,13 @@ final class GatewayTest extends TestCase
             $value
         );
 
-        $this->assertFalse($returned);
+        self::assertFalse($returned);
     }
 
     /**
      * @test
      */
-    public function shouldNotPayWhenFailOnGateway()
+    public function shouldNotPayWhenFailOnGateway(): void
     {
         $clientMock = $this->createMock(HttpClientInterface::class);
         $clientMock->method('send')
@@ -76,13 +76,13 @@ final class GatewayTest extends TestCase
             $value
         );
 
-        $this->assertFalse($returned);
+        self::assertFalse($returned);
     }
 
     /**
      * @test
      */
-    public function shouldSuccessfullyPayWhenGatewayReturnOk()
+    public function shouldSuccessfullyPayWhenGatewayReturnOk(): void
     {
         $clientMock = $this->createMock(HttpClientInterface::class);
         $clientMock->method('send')
@@ -108,7 +108,7 @@ final class GatewayTest extends TestCase
             $value
         );
 
-        $this->assertTrue($returned);
+        self::assertTrue($returned);
     }
 
     private function fakeHttpClientSend($method, $url, $body)
@@ -133,7 +133,7 @@ final class GatewayTest extends TestCase
         }
     }
 
-    private function getDateTimeNow()
+    private function getDateTimeNow(): object
     {
         return new DateTime('now');
     }

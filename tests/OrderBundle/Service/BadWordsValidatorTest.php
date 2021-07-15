@@ -14,7 +14,7 @@ final class BadWordsValidatorTest extends TestCase
      * @test
      * @dataProvider badWordsProvider
      */
-    public function hasBadWords($badWordsList, $text, $expected)
+    public function hasBadWords($badWordsList, $text, $expected): void
     {
         $mock = $this->createMock(BadWordsRepository::class);
         $mock->method('findAllAsArray')->willReturn($badWordsList);
@@ -26,7 +26,7 @@ final class BadWordsValidatorTest extends TestCase
         self::assertEquals($expected, $returned);
     }
 
-    public function badWordsProvider()
+    public function badWordsProvider(): array
     {
         $badWordsListByTigre = ['jujuba de anis', 'vai comer beijinho antes da janta', 'cajuzinho diet'];
 

@@ -16,7 +16,7 @@ final class FidelityProgramServiceTest extends TestCase
     /**
      * @test
      */
-    public function shouldSaveWhenReceivePoints()
+    public function shouldSaveWhenReceivePoints(): void
     {
         $repositoryMock = $this->createMock(PointsRepository::class);
         $repositoryMock->expects($this->once())
@@ -43,7 +43,7 @@ final class FidelityProgramServiceTest extends TestCase
     /**
      * @test
      */
-    public function shouldNotSaveWhenReceiveZeroPoint()
+    public function shouldNotSaveWhenReceiveZeroPoint(): void
     {
         $repositoryMock = $this->createMock(PointsRepository::class);
         $repositoryMock->expects($this->never())
@@ -70,7 +70,7 @@ final class FidelityProgramServiceTest extends TestCase
     /**
      * @test
      */
-    public function shouldReturnLogMessagesWhenSavePoints()
+    public function shouldReturnLogMessagesWhenSavePoints(): void
     {
         $repositoryMock = $this->createMock(PointsRepository::class);
 
@@ -103,6 +103,6 @@ final class FidelityProgramServiceTest extends TestCase
             'Customer received points'
         ];
 
-        $this->assertEquals($expectedMessages, $allMessages);
+        self::assertEquals($expectedMessages, $allMessages);
     }
 }
