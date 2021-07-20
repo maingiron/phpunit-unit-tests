@@ -39,7 +39,7 @@ final class PaymentServiceTest extends TestCase
      */
     public function shouldBeSaveWhenGatewayReturnedOkWithRetries(): void
     {
-        $this->gatewayMock->expects($this->atLeast(3))
+        $this->gatewayMock->expects(self::atLeast(3))
             ->method('pay')
             ->will($this->onConsecutiveCalls(
                 false, false, true
@@ -58,7 +58,7 @@ final class PaymentServiceTest extends TestCase
      */
     public function shouldBeThrowExceptionWhenGatewayFailed(): void
     {
-        $this->gatewayMock->expects($this->atLeast(3))
+        $this->gatewayMock->expects(self::atLeast(3))
             ->method('pay')
             ->will($this->onConsecutiveCalls(
                 false, false, false

@@ -31,7 +31,7 @@ final class BadWordsValidatorTest extends TestCase
      * @test
      * @dataProvider badWordsProvider
      */
-    public function hasBadWordsUsangeMockely($badWordsList, $text, $expected): void
+    public function hasBadWordsUsingMockely($badWordsList, $text, $expected): void
     {
         $mock = Mockery::mock(BadWordsRepository::class);
         $mock->shouldReceive('findAllAsArray')->andReturn($badWordsList);
