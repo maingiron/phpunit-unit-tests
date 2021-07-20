@@ -13,7 +13,7 @@ final class PointsCalculatorTest extends TestCase
      * @test
      * @dataProvider pointsProvider
      */
-    public function pointsToReceive($value, $expected)
+    public function pointsToReceive($value, $expected): void
     {
         $service = new PointsCalculator();
 
@@ -22,7 +22,7 @@ final class PointsCalculatorTest extends TestCase
         self::assertEquals($expected, $returned);
     }
 
-    public function pointsProvider()
+    public function pointsProvider(): array
     {
         return [
             [30, 0],
