@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\OrderBundle\Service;
 
+use Mockery;
 use OrderBundle\Repository\BadWordsRepository;
 use OrderBundle\Service\BadWordsValidator;
 use PHPUnit\Framework\TestCase;
@@ -18,6 +19,22 @@ final class BadWordsValidatorTest extends TestCase
     {
         $mock = $this->createMock(BadWordsRepository::class);
         $mock->method('findAllAsArray')->willReturn($badWordsList);
+
+        $validator = new BadWordsValidator($mock);
+
+        $returned = $validator->hasBadWords($text);
+
+        self::assertEquals($expected, $returned);
+    }
+
+    /**
+     * @test
+     * @dataProvider badWordsProvider
+     */
+    public function hasBadWordsUsangeMockely($badWordsList, $text, $expected): void
+    {
+        $mock = Mockery::mock(BadWordsRepository::class);
+        $mock->shouldReceive('findAllAsArray')->andReturn($badWordsList);
 
         $validator = new BadWordsValidator($mock);
 
